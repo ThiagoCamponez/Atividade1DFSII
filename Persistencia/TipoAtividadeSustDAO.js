@@ -18,7 +18,7 @@ export default class TipoAtividadeSustDAO{
                     CONSTRAINT pk_tipoAtividadeSust PRIMARY KEY(tipo_id)
                 );`;
             await conexao.execute(sql);
-            await conexao.release();
+            global.poolConexoes.releaseConnection(conexao); 
         }
         catch (e) {
             console.log("Não foi possível iniciar o banco de dados: " + e.message);
@@ -77,6 +77,7 @@ export default class TipoAtividadeSustDAO{
         }
         const conexao = await conectar();
         const [registros, campos] = await conexao.execute(sql,parametros);
+        global.poolConexoes.releaseConnection(conexao);
         let listaTipoAtividadeSust = [];
         for (const registro of registros){
             const tipoAtividadeSust = new TipoAtividadeSustentavel(registro.tipo_id,registro.tipo_nome);
@@ -87,12 +88,13 @@ export default class TipoAtividadeSustDAO{
 
     async possuiAtividadeSust(tipoAtividadeSust){
         if (tipoAtividadeSust instanceof TipoAtividadeSustentavel){
-            const sql = `SELECT count(*) as qtd 
-                         FROM atividadeSustentavel p
+            const sql = `SELECT count(*) as qtd FROM atividadeSustentavel p
                          INNER JOIN tipoAtividadeSust t ON p.tipo_id = t.tipo_id
                          WHERE t.tipo_id = ?`;
             const parametros = [tipoAtividadeSust.id];
-            const [registros]  = await global.poolConexoes.execute(sql,parametros);
+            const conexao = await conectar(); //retorna uma conexão
+            const [registros]  = await conexao.execute(sql,parametros);
+            global.poolConexoes.releaseConnection(conexao);
             return registros[0].qtd > 0;
             
         }	

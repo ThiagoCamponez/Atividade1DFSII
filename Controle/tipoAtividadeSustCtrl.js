@@ -133,11 +133,11 @@ export default class TipoAtividadeSust {
         }
         if (requisicao.method === "GET"){
             const tipoAtividadeSustentavel = new TipoAtividadeSustentavel();
-            tipoAtividadeSustentavel.consultar(termo).then((listaAtividades)=>{
+            tipoAtividadeSustentavel.consultar(termo).then((listaTipos)=>{
                 resposta.json(
                     {
                         status:true,
-                        listaAtividades
+                        listaTipos
                     });
             })
             .catch((erro)=>{

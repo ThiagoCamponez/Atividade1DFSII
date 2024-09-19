@@ -13,7 +13,7 @@ export default class AtividadeSustentavelCtrl {
             const endereco = dados.endereco;
             const bairro = dados.bairro;
             const numero = dados.numero;
-            const tipo_id = dados.tipoAtividadeSust.id;
+            const tipo_id = dados.tipoatividadesust.id;
             const data = dados.data;
             const horarioInicial = dados.horarioInicial;
             const horarioFinal = dados.horarioFinal;
@@ -21,8 +21,8 @@ export default class AtividadeSustentavelCtrl {
 
 
             if (nome && cpf && contato && endereco && bairro && numero && tipo_id && data && horarioInicial && horarioFinal && descricaoCompleta) {
-                const tipoAtividadeSust = new TipoAtividadeSust(tipo_id);
-                const atividadeSustentavel = new AtividadeSustentavel(0, nome, cpf, contato, endereco, bairro, numero, tipoAtividadeSust, data, horarioInicial, horarioFinal, descricaoCompleta);
+                const tipoatividadesust = new TipoAtividadeSust(tipo_id);
+                const atividadeSustentavel = new AtividadeSustentavel(0, nome, cpf, contato, endereco, bairro, numero, tipoatividadesust, data, horarioInicial, horarioFinal, descricaoCompleta);
                 //resolver a promise
                 atividadeSustentavel.gravar().then(() => {
                     resposta.status(200).json({
@@ -64,7 +64,7 @@ export default class AtividadeSustentavelCtrl {
             const endereco = dados.endereco;
             const bairro = dados.bairro;
             const numero = dados.numero;
-            const tipo_id = dados.tipoAtividadeSust.id;
+            const tipo_id = dados.tipoAtividadeSustentavel.id;
             const data = dados.data;
             const horarioInicial = dados.horarioInicial;
             const horarioFinal = dados.horarioFinal;
@@ -72,8 +72,8 @@ export default class AtividadeSustentavelCtrl {
 
 
             if (id &&nome && cpf && contato && endereco && bairro && numero && tipo_id && data && horarioInicial && horarioFinal && descricaoCompleta) {
-                const tipoAtividadeSust = new TipoAtividadeSust(tipo_id);
-                const atividadeSustentavel = new AtividadeSustentavel(id, nome, cpf, contato, endereco, bairro, numero, tipoAtividadeSust, data, horarioInicial, horarioFinal, descricaoCompleta);
+                const tipoatividadesust = new TipoAtividadeSust(tipo_id);
+                const atividadeSustentavel = new AtividadeSustentavel(id, nome, cpf, contato, endereco, bairro, numero, tipoatividadesust, data, horarioInicial, horarioFinal, descricaoCompleta);
                 //resolver a promise
                 atividadeSustentavel.atualizar().then(() => {
                     resposta.status(200).json({
