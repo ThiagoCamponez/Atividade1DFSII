@@ -1,10 +1,10 @@
-import { Alert } from "react-bootstrap";
 import FormCadTipo from "./Formularios/FormCadTipo";
-import Pagina from "../Templates/Pagina";
+import Pagina from "../TemplatesT/Pagina";
 import { useEffect, useState, useContext } from "react";
 import TabelaTipos from "./Tabelas/TabelaTipos";
 import { consultarTodos } from "../../servicos/tipoService";
 import { ContextoUsuarioLogado } from "../../App";
+import { Button, Row, Col } from "react-bootstrap";
 export default function TelaCadastroTipo(props) {
     const contextoUsuario = useContext(ContextoUsuarioLogado);
     const [exibirTabela, setExibirTabela] = useState(true);
@@ -24,12 +24,22 @@ export default function TelaCadastroTipo(props) {
 
     return (
         <div>
-            <Pagina>
-                |<Alert className="mt-02 mb-02 success text-center" variant="success">
-                    <h2>
-                        Cadastro de Tipo de Atividades Sustentáveis
-                    </h2>
-                </Alert>
+            <Pagina>   
+                <div className="mt-05 mb-05 p-2 text-start">             
+                    <Row className="align-items-center">
+                        <Col>
+                            <h2>Cadastro de Tipo de Atividades Sustentáveis</h2>
+                        </Col>
+                        <Col className="text-end">
+                            <Button className="mb-3" variant="primary" onClick={() => {
+                                    setExibirTabela(false);
+                                }}>
+                                Adicionar
+                            </Button>
+                        </Col>                    
+                        <hr />
+                    </Row>
+                </div>
                 {
                     exibirTabela ?
                         <TabelaTipos listaDeTipos={listaDeTipos} 

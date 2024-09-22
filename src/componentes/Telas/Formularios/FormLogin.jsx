@@ -1,7 +1,7 @@
-import { Container, Form, Button } from 'react-bootstrap';
 import { useContext, useState } from 'react';
 import { ContextoUsuarioLogado } from '../../../App';
 import { login } from '../../../servicos/loginService';
+import './FormLogin.css';
 export default function FormLogin(props) {
     const contexto = useContext(ContextoUsuarioLogado);
     const [usuario, setUsuario] = useState({
@@ -31,35 +31,43 @@ export default function FormLogin(props) {
     function manipularMudanca(evento) {
         const { name, value } = evento.target;
         setUsuario({ ...usuario, [name]: value });
+
     }
     return (
-        <Container className="border p-5 m-5">
-            <Form onSubmit={realizarLogin}>
-                <Form.Group className="mb-3" controlId="usuario">
-                    <Form.Label>Usuário:</Form.Label>
-                    <Form.Control type="text"
-                        id="usuario"
-                        name="usuario"
-                        placeholder="Informe o nome do usuário"
-                        value={usuario.nome} 
-                        onChange={manipularMudanca}
+        <div className="login-page">
+            <div className="wrapper">
+                <form onSubmit={realizarLogin}>
+                <h1>ECOGEST</h1>
+                <p>Inovando o Presente, Preservando o futuro.</p>
+                <div className="input-box">
+                    <input
+                    type="text"
+                    id="usuario"
+                    name="usuario"
+                    placeholder="Informe o nome do usuário"
+                    value={usuario.nome} 
+                    onChange={manipularMudanca}
                     />
-                    
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="senha">
-                    <Form.Label>Senha:</Form.Label>
-                    <Form.Control type="password"
-                        id='senha'
-                        name='senha'
-                        placeholder="Informe a senha de acesso."
-                        value={usuario.senha}
-                        onChange={manipularMudanca} />
-                </Form.Group>
-
-                <Button variant="success" type="submit">
-                    Entrar
-                </Button>
-            </Form>
-        </Container>
+                </div>
+                <div className="input-box">
+                    <input
+                    type="password"
+                    id='senha'
+                    name='senha'
+                    placeholder="Informe a senha de acesso."
+                    value={usuario.senha}
+                    onChange={manipularMudanca}
+                    />
+                </div>        
+                <button type="submit" className="btn">Login</button>
+                <div className="register-link">
+                    <p>
+                    Não tem uma conta? <a href="/register">Crie uma conta</a>
+                    </p>
+                </div>
+                </form>
+            </div>
+        </div>
+        
     );
 }

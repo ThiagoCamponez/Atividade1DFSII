@@ -89,7 +89,7 @@ export default function FormCadAtividades(props) {
     }
 
     return (
-        <Form noValidate validated={validado} onSubmit={manipularSubmissao}>
+        <Form noValidate validated={validado} onSubmit={manipularSubmissao} style={{ maxWidth: '80%', margin: '0 auto', padding: '0 15px' }}>
             <Row className="mb-4">
                 <Form.Group as={Col} md="4" controlId="id">
                     <Form.Label>Código</Form.Label>
@@ -123,7 +123,6 @@ export default function FormCadAtividades(props) {
                 <Form.Group as={Col} md="4" controlId="cpf">
                     <Form.Label>CPF:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="cpf">R$</InputGroup.Text>
                         <Form.Control
                             type="text"
                             id="cpf"
@@ -141,7 +140,6 @@ export default function FormCadAtividades(props) {
                 <Form.Group as={Col} md="4" controlId="contato">
                     <Form.Label>Contato:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="contato">R$</InputGroup.Text>
                         <Form.Control
                             type="text"
                             id="contato"
@@ -159,7 +157,6 @@ export default function FormCadAtividades(props) {
                 <Form.Group as={Col} md="4" controlId="endereco">
                     <Form.Label>Endereço:</Form.Label>
                     <InputGroup hasValidation>
-                        <InputGroup.Text id="endereco">+</InputGroup.Text>
                         <Form.Control
                             type="text"
                             id="endereco"
@@ -213,7 +210,7 @@ export default function FormCadAtividades(props) {
                     <Form.Label>Data:</Form.Label>
                     <Form.Control
                         required
-                        type="text"
+                        type="date"
                         id="data"
                         name="data"
                         value={atividade.data}

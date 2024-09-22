@@ -1,10 +1,10 @@
-import { Alert } from "react-bootstrap";
 import FormCadAtividades from "./Formularios/FormCadAtividade";
-import Pagina from "../Templates/Pagina";
+import Pagina from "../TemplatesT/Pagina";
 import { useEffect, useState, useContext } from "react";
 import TabelaAtividades from "./Tabelas/TabelaAtividades";
 import { consultarTodos } from "../../servicos/atividadeService";
 import { ContextoUsuarioLogado } from "../../App";
+import { Button, Row, Col } from "react-bootstrap";
 
 export default function TelaCadastroAtividade(props) {
     const contextoUsuario = useContext(ContextoUsuarioLogado);
@@ -17,36 +17,44 @@ export default function TelaCadastroAtividade(props) {
     useEffect(() => {
         const token = contextoUsuario.usuarioLogado.token;
         consultarTodos(token).then((resposta) => {
-            setListaDeAtividades(resposta.listaAtividades );
+            setListaDeAtividades(resposta.listaAtividades);
         }).catch((erro) => {
             alert("Erro ao enviar a requisição: " + erro.message);
         });
     }, [atualizarTela, exibirTabela, contextoUsuario.usuarioLogado.token]);
-   
+
     return (
         <div>
             <Pagina>
-                |<Alert className="mt-02 mb-02 success text-center" variant="success">
-                    <h2>
-                        Cadastro de Atividade Sustentável
-                    </h2>
-                </Alert>
-                {
-                    exibirTabela ?
-                        <TabelaAtividades listaDeAtividades={listaDeAtividades} 
-                                        setExibirTabela={setExibirTabela}
-                                        setModoEdicao={setModoEdicao}
-                                        setAtividadeSelecionada={setAtividadeSelecionada} 
-                                        setAtualizarTela={setAtualizarTela}/> :
-                        <FormCadAtividades setExibirTabela={setExibirTabela}
-                                         setModoEdicao={setModoEdicao}
-                                         modoEdicao={modoEdicao}
-                                         setAtividadeSelecionada={setAtividadeSelecionada}
-                                         atividadeSelecionada={atividadeSelecionada}
-                                         setAtualizarTela={setAtualizarTela} />
+                <div className="mt-05 mb-05 p-2 text-start">
+                    <Row className="align-items-center">
+                        <Col>
+                            <h2>Cadastro de Atividade Sustentável</h2>
+                        </Col>
+                        <Col className="text-end"> {/* Alinha o botão no canto direito */}
+                            <Button className="mb-3" variant="primary" onClick={() => {
+                                setExibirTabela(false);
+                            }}>
+                                Adicionar
+                            </Button>
+                        </Col>
+                        <hr/>
+                    </Row>
+                </div>
+                {exibirTabela ?
+                    <TabelaAtividades listaDeAtividades={listaDeAtividades}
+                        setExibirTabela={setExibirTabela}
+                        setModoEdicao={setModoEdicao}
+                        setAtividadeSelecionada={setAtividadeSelecionada}
+                        setAtualizarTela={setAtualizarTela} /> :
+                    <FormCadAtividades setExibirTabela={setExibirTabela}
+                        setModoEdicao={setModoEdicao}
+                        modoEdicao={modoEdicao}
+                        setAtividadeSelecionada={setAtividadeSelecionada}
+                        atividadeSelecionada={atividadeSelecionada}
+                        setAtualizarTela={setAtualizarTela} />
                 }
             </Pagina>
         </div>
     );
-
 }
